@@ -113,7 +113,6 @@ def train(model_ID, dataset_ID):
     dataset = datasets[dataset_ID]
     model = models[model_ID]
 
-    print('data shape',dataset_ID, dataset.shape) 
     # return
     X = dataset.iloc[:,1:].values
     y = dataset.iloc[:,0].values
@@ -123,7 +122,7 @@ def train(model_ID, dataset_ID):
     Y = pd.get_dummies(y1).values
     # print(X.shape)
     # print(Y)
-    print(f"X shape: {X.shape}, Y shape: {Y.shape}")
+    # print(f"X shape: {X.shape}, Y shape: {Y.shape}")
 
 
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
