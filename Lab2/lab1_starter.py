@@ -4,7 +4,7 @@ from flask import Response
 from flask import jsonify
 import pandas as pd
 
-from base_iris_lab1 import add_dataset, build, train, score, upload_training, create_and_train_model, retrain_model
+from base_iris_lab1 import add_dataset, build, train, score, upload_training, create_and_train_model, retrain_model, test
 
 app = Flask(__name__)
 
@@ -43,6 +43,22 @@ def score_model_route(model_ID):
         return jsonify({'error': 'Input is Invalid: Ensure fields are numbers and formatted'}), 400
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+docker tag vom-lab2 douyeszn1/ai-sys:tag
+docker push  douyeszn1/ai-sys
+
+@app.route('/iris/model/<int:model_id>/test', methods=['GET'])
+def test_model_route(model_id):
+    dataset_id = request.args.get('dataset')
+    if dataset_id is None:
+        return jsonify({"error": "Dataset ID is required"}), 400
+    
+    try:
+        test_results = test(model_id, dataset_id)
+        return jsonify(test_results)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 
 
