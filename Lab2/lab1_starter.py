@@ -44,9 +44,6 @@ def score_model_route(model_ID):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-docker tag vom-lab2 douyeszn1/ai-sys:tag
-docker push  douyeszn1/ai-sys
-
 @app.route('/iris/model/<int:model_id>/test', methods=['GET'])
 def test_model_route(model_id):
     dataset_id = request.args.get('dataset')
@@ -55,6 +52,7 @@ def test_model_route(model_id):
     
     try:
         test_results = test(model_id, dataset_id)
+        print("Test Results:", jsonify(test_results))
         return jsonify(test_results)
     except Exception as e:
         return jsonify({"error": str(e)}), 500

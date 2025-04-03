@@ -178,10 +178,7 @@ def test( model_id, dataset_id ):
 
     model = models[int(model_id)]
     df = datasets[int(dataset_id)]
-
-    # X_test = df.iloc[:,1:21].values
-    # y = df.iloc[:,0].values
-    print('Got here.,,,,,')
+    
     X_test = df.iloc[:,1:].values
     y = df.iloc[:,0].values
 
