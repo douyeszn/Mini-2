@@ -269,13 +269,6 @@ def test(model_id, dataset_id):
                 post_score(scores_table, feature_string, class_string, actual_string, prob_string)
                 
                 print(f"Posted record {i+1}/{len(df)} to DynamoDB")
-                
-                mismatch = (actual_string != class_string)
-                low_confidence = (prob_value < 0.9)
-                
-                if mismatch or low_confidence:
-                    print(f"Found problematic record (mismatch: {mismatch}, low confidence: {low_confidence}) - copying to retraining table")
-                    post_score(scores_table, feature_string, class_string, actual_string, prob_string)
         
         except (ImportError, AttributeError) as e:
             print(f"Could not import required components for DynamoDB logging: {str(e)}")
